@@ -6,8 +6,10 @@ import { addLead } from '../../actions/leads';
 export class Form extends Component {
     state = {
         name: "",
-        email: '',
-        message: ''
+        email: "",
+        phone: "",
+        website: "",
+        message: ""
     };
 
     static propTypes = {
@@ -18,13 +20,20 @@ export class Form extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const { name, email, message } = this.state;
-        const lead = { name, email, message };
+        const { name, email, phone, website, message } = this.state;
+        const lead = { name, email, phone, website, message };
         this.props.addLead(lead);
+        this.setState({
+            name: "",
+            email: "",
+            phone: "",
+            website: "",
+            message: "",
+         });
     };
 
     render() {
-        const { name, email, message } = this.state;
+        const { name, email, phone, website, message } = this.state;
 
         return (
           <div className="card card-body mt-4 mb-4">
@@ -48,6 +57,26 @@ export class Form extends Component {
                   name="email"
                   onChange={this.onChange}
                   value={email}
+                />
+              </div>
+              <div className="form-group">
+                <label>Phone</label>
+                <input
+                  className="form-control"
+                  type="phone"
+                  name="phone"
+                  onChange={this.onChange}
+                  value={phone}
+                />
+              </div>
+              <div className="form-group">
+                <label>Website</label>
+                <input
+                  className="form-control"
+                  type="website"
+                  name="website"
+                  onChange={this.onChange}
+                  value={website}
                 />
               </div>
               <div className="form-group">
